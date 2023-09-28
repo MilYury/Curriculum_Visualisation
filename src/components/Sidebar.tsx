@@ -1,5 +1,5 @@
 import { Card, Menu, type MenuProps } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { type RootState } from '../store/reducers';
@@ -28,6 +28,11 @@ function getItem(options: MenuItemOptions): MenuItem {
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const toggleCollapse = (): void => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   const selectedSubject = useSelector(
     (state: RootState) => state.subjects.selectedData
@@ -74,32 +79,38 @@ const Sidebar: React.FC = () => {
 
   return (
     <div style={{ width: 256 }}>
-      <Menu
-        onClick={onClick}
-        style={{ width: 256 }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['home']}
-        mode="inline"
-        items={items}
-      />
-      {selectedSubject !== undefined && (
-        <Card
-          style={{ marginTop: '20px' }}
-          title="Selected Subject"
-          bordered={true}
-        >
-          {selectedSubject.FullTitle}
-        </Card>
-      )}
-      {selectedCourse !== undefined && (
-        <Card
-          style={{ marginTop: '20px' }}
-          title="Selected Course"
-          bordered={true}
-        >
-          {selectedCourse.FullTitle}
-        </Card>
-      )}
+      <button className="sidebar-toggle" onClick={toggleCollapse}>
+        Toggle Sidebar
+      </button>
+
+      <div className={`sidebar-content ${isCollapsed ? 'collapsed' : ''}`}>
+        <Menu
+          onClick={onClick}
+          style={{ width: 256 }}
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['home']}
+          mode="inline"
+          items={items}
+        />
+        {selectedSubject !== undefined && (
+          <Card
+            style={{ marginTop: '20px' }}
+            title="Selected Subject"
+            bordered={true}
+          >
+            {selectedSubject.FullTitle}
+          </Card>
+        )}
+        {selectedCourse !== undefined && (
+          <Card
+            style={{ marginTop: '20px' }}
+            title="Selected Course"
+            bordered={true}
+          >
+            {selectedCourse.FullTitle}
+          </Card>
+        )}
+      </div>
     </div>
   );
 };

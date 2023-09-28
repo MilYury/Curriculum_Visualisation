@@ -14,7 +14,7 @@ const CourseMap: React.FC = () => {
   const coursesPerPage = 20;
 
   const filteredCourses = courses.data?.filter((course) =>
-    course.FullTitle.toLowerCase().includes(search.trim())
+    course.FullTitle.toLowerCase().includes(search.toLowerCase().trim())
   );
 
   const coursesToDisplay = filteredCourses?.slice(
@@ -46,7 +46,7 @@ const CourseMap: React.FC = () => {
         />
         <Row gutter={[16, 16]}>
           {coursesToDisplay?.map((course: ICourse, index: number) => (
-            <Col key={index} span={6}>
+            <Col key={index} xs={24} sm={12} md={8} lg={6}>
               <Course {...course} />
             </Col>
           ))}

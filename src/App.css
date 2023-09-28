@@ -19,3 +19,109 @@
   overflow-y: auto;
   padding: 20px;
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100px;
+  }
+
+  .content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    overflow-y: visible;
+  }
+
+  .layout {
+    flex-direction: column;
+  }
+
+  .content {
+    flex: none;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+  }
+}
+
+.sidebar-content.collapsed {
+  display: none;
+}
+
+.sidebar-toggle {
+  background-color: #007BFF;
+  color: #FFFFFF;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left: auto;
+  z-index: 1000;
+}
+
+@media (min-width: 768px) {
+  .sidebar-content.collapsed {
+    display: block;
+  }
+
+  .sidebar-toggle {
+    display: none;
+  }
+}
+
+.sidebar-content .ant-menu-item {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .sidebar-content .ant-menu-item {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-content .ant-menu-item {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-content .ant-card {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .sidebar-content .ant-card .ant-card-head {
+    padding: 8px 16px;
+  }
+
+  .sidebar-content .ant-card .ant-card-body {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-content .ant-card {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .sidebar-content .ant-card .ant-card-head {
+    padding: 6px 12px;
+  }
+
+  .sidebar-content .ant-card .ant-card-body {
+    padding: 6px 12px;
+  }
+}

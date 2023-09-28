@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Layout from './components/Layout';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Contact from './components/Contact';
 import ExploreSubjects from './components/ExploreSubjects';
@@ -18,7 +18,7 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <DataLoader />
-      <BrowserRouter basename="/Curriculum_Visualisation">
+      <HashRouter>
         <Layout>
           <Routes>
             <Route path="/" Component={Home} />
@@ -34,7 +34,7 @@ const App: React.FC = () => {
             <Route path="/contact" Component={Contact} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 };

@@ -14,7 +14,7 @@ const SubjectMap: React.FC = () => {
   const subjects = useSelector((state: RootState) => state.subjects);
 
   const filteredSubjects = subjects.data?.filter((subject) =>
-    subject.FullTitle.toLowerCase().includes(search.trim())
+    subject.FullTitle.toLowerCase().includes(search.toLowerCase().trim())
   );
 
   const subjectsPerPage = 20;
@@ -42,7 +42,7 @@ const SubjectMap: React.FC = () => {
         />
         <Row gutter={[16, 16]}>
           {displayedSubjects?.map((subject: ISubject, index: number) => (
-            <Col key={index} span={6}>
+            <Col key={index} xs={24} sm={12} md={8} lg={6}>
               <Subject {...subject} />
             </Col>
           ))}
