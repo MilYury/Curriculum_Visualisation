@@ -29,7 +29,10 @@ export const csvJSON = (csv: any): any => {
 };
 
 export const fetchCsv = async (name: string): Promise<any> => {
-  const response = await fetch(name);
+  const baseUrl = process.env.PUBLIC_URL ?? '';
+  const fullPath = `${baseUrl}/${name}`;
+
+  const response = await fetch(fullPath);
   const reader = response?.body?.getReader();
   const result = await reader?.read();
   const decoder = new TextDecoder('utf-8');

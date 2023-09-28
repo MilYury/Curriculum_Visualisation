@@ -60,7 +60,7 @@ const Course: React.FC<ICourse> = ({
               <Panel header={<strong>Subjects</strong>} key="1">
                 {Subjects.map((subject, index) => (
                   <p key={index}>
-                    <strong>{subject.StudyPackageCd}</strong> -{' '}
+                    <strong>{subject?.StudyPackageCd}</strong> -{' '}
                     {subject?.FullTitle}
                   </p>
                 ))}

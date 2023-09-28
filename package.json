@@ -1,7 +1,7 @@
 {
   "name": "curriculum-visualisation",
   "version": "0.1.0",
-  "homepage": "https://MilYury/github.io/Curriculum_Visualisation",
+  "homepage": "https://MilYury.github.io/Curriculum_Visualisation",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

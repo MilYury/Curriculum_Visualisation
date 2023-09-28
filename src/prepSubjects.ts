@@ -32,7 +32,7 @@ const matchPreRequisites = (
   });
 
   preRequisites.forEach((preRequisite: IPreRequisite) => {
-    const subjectIdWithoutZero = preRequisite.ToSubjectID.toString().replace(
+    const subjectIdWithoutZero = preRequisite.ToSubjectID?.toString().replace(
       /^0+/,
       ''
     );

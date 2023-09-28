@@ -18,7 +18,7 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <DataLoader />
-      <BrowserRouter>
+      <BrowserRouter basename="/Curriculum_Visualisation">
         <Layout>
           <Routes>
             <Route path="/" Component={Home} />

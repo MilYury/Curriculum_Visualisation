@@ -42,7 +42,7 @@ const matchPreRequisites = (
   });
 
   coursesToSubjects.forEach((courseToSubject: ICourseToSubject) => {
-    const subjectIdWithoutZero = courseToSubject.SubjectID.toString().replace(
+    const subjectIdWithoutZero = courseToSubject.SubjectID?.toString().replace(
       /^0+/,
       ''
     );
