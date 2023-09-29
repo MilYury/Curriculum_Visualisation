@@ -33,6 +33,35 @@ const ExploreCoursesCollapse: React.FC = () => {
               )}
           </Panel>
         ))}
+        {selectedCourse?.SPKs?.map((spk) => (
+          <Panel header={spk.FullTitle} key={spk.StudyPackageCd}>
+            <h3>Details:</h3>
+            <p>Insert info about SPK here</p>
+            {spk.RelatedSPK !== undefined && spk.RelatedSPK.length > 0 && (
+              <>
+                <h4>Related SPKs:</h4>
+                <ul>
+                  {spk.RelatedSPK.map((relatedSpk) => (
+                    <li key={relatedSpk.StudyPackageCd}>
+                      {relatedSpk.FullTitle}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {spk.RelatedSubjects !== undefined &&
+              spk.RelatedSubjects.length > 0 && (
+                <>
+                  <h4>Subjects:</h4>
+                  <ul>
+                    {spk.RelatedSubjects.map((subject) => (
+                      <li key={subject.StudyPackageCd}>{subject.FullTitle}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+          </Panel>
+        ))}
       </Collapse>
     </div>
   );

@@ -1,12 +1,11 @@
-import type ISPK from './ISPK';
 import type ISubject from './ISubject';
 
-interface ICourse {
+interface ISPK {
   StudyPackageCd: string;
   FullTitle: string;
   CreditPointValue: number;
-  SPKs: ISPK[];
-  Subjects: ISubject[];
+  RelatedSPK: ISPK[];
+  RelatedSubjects: ISubject[];
 }
 
-export default ICourse;
+export default ISPK;

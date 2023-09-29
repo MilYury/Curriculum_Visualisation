@@ -4,6 +4,7 @@ import type ICourse from '../interfaces/ICourse';
 import { useDispatch, useSelector } from 'react-redux';
 import { type RootState } from '../store/reducers';
 import Checkbox, { type CheckboxChangeEvent } from 'antd/es/checkbox';
+import SPKPanel from './SPK';
 
 const { Panel } = Collapse;
 
@@ -11,7 +12,8 @@ const Course: React.FC<ICourse> = ({
   StudyPackageCd,
   FullTitle,
   CreditPointValue,
-  Subjects
+  Subjects,
+  SPKs
 }) => {
   const dispatch = useDispatch();
   const selectedCourse = useSelector(
@@ -55,6 +57,7 @@ const Course: React.FC<ICourse> = ({
           <p>
             <strong>Credit Point Value:</strong> {CreditPointValue}
           </p>
+          {SPKs?.length > 0 && <SPKPanel spks={SPKs} />}
           {Subjects?.length > 0 && (
             <Collapse key={StudyPackageCd}>
               <Panel header={<strong>Subjects</strong>} key="1">

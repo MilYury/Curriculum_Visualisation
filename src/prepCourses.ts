@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type ICourse from './interfaces/ICourse';
+import type ICourseToSPK from './interfaces/ICourseToSPK';
 import type ICourseToSubject from './interfaces/ICourseToSubject';
+import type ISPK from './interfaces/ISPK';
 import type ISubject from './interfaces/ISubject';
 import { fetchCsv, csvJSON } from './readCSV';
 
-export const prepCourses = async (subjects: ISubject[]): Promise<ICourse[]> => {
+export const prepCourses = async (
+  subjects: ISubject[],
+  spks: ISPK[]
+): Promise<ICourse[]> => {
   const coursesCsv = await fetchCsv('courses.csv');
   const coursesJson = csvJSON(coursesCsv);
   let courses = JSON.parse(coursesJson);
@@ -24,7 +29,12 @@ export const prepCourses = async (subjects: ISubject[]): Promise<ICourse[]> => {
   const coursesToSubjectsJson = csvJSON(coursesToSubjectsCsv);
   const coursesToSubjects = JSON.parse(coursesToSubjectsJson);
 
+  const courseToSpksCsv = await fetchCsv('course_spk.csv');
+  const courseToSpksJson = csvJSON(courseToSpksCsv);
+  const courseToSpks = JSON.parse(courseToSpksJson);
+
   courses = matchPreRequisites(courses, coursesToSubjects, subjects);
+  courses = matchCoursesToSPKs(courses, courseToSpks, spks);
 
   return courses;
 };
@@ -64,6 +74,36 @@ const matchPreRequisites = (
               subjectIdWithoutZero
           )!
         );
+      }
+    }
+  });
+
+  return courses;
+};
+
+const matchCoursesToSPKs = (
+  courses: ICourse[],
+  courseToSpks: ICourseToSPK[],
+  spks: ISPK[]
+): ICourse[] => {
+  const courseMap: Record<string, ICourse> = {};
+  courses.forEach((course: ICourse) => {
+    courseMap[course.StudyPackageCd] = course;
+  });
+
+  const spkMap: Record<string, ISPK> = {};
+  spks.forEach((spk: ISPK) => {
+    spkMap[spk.StudyPackageCd] = spk;
+  });
+
+  courseToSpks.forEach((relation: ICourseToSPK) => {
+    const spk = spkMap[relation.SPKID];
+    const course = courseMap[relation.CourseID];
+    if (course !== undefined && spk !== undefined) {
+      if (course.SPKs === undefined) {
+        course.SPKs = [spk];
+      } else {
+        course.SPKs.push(spk);
       }
     }
   });

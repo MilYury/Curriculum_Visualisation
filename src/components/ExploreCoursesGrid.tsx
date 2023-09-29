@@ -39,6 +39,41 @@ const ExploreCourseGrid: React.FC = () => {
             </Card>
           </Col>
         ))}
+        {(selectedCourse?.SPKs ?? []).map((spk) => (
+          <Col span={8} key={spk.StudyPackageCd}>
+            <Card hoverable>
+              <Meta
+                title={spk.FullTitle}
+                description={'Add description for SPK here'}
+              />
+              {spk.RelatedSPK !== undefined && spk.RelatedSPK.length > 0 && (
+                <div style={{ marginTop: '16px' }}>
+                  <strong>Related SPKs:</strong>
+                  <List
+                    size="small"
+                    dataSource={spk.RelatedSPK}
+                    renderItem={(RelatedSPK) => (
+                      <List.Item>{RelatedSPK.FullTitle}</List.Item>
+                    )}
+                  />
+                </div>
+              )}
+              {spk.RelatedSubjects !== undefined &&
+                spk.RelatedSubjects.length > 0 && (
+                  <div style={{ marginTop: '16px' }}>
+                    <strong>Subjects:</strong>
+                    <List
+                      size="small"
+                      dataSource={spk.RelatedSubjects}
+                      renderItem={(subject) => (
+                        <List.Item>{subject.FullTitle}</List.Item>
+                      )}
+                    />
+                  </div>
+                )}
+            </Card>
+          </Col>
+        ))}
       </Row>
     </div>
   );
