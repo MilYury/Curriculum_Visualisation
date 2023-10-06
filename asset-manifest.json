@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Curriculum_Visualisation/static/css/main.bdb4d610.css",
-    "main.js": "/Curriculum_Visualisation/static/js/main.25f344ee.js",
+    "main.js": "/Curriculum_Visualisation/static/js/main.3828d9b6.js",
     "static/js/787.5e9f5add.chunk.js": "/Curriculum_Visualisation/static/js/787.5e9f5add.chunk.js",
     "index.html": "/Curriculum_Visualisation/index.html",
     "main.bdb4d610.css.map": "/Curriculum_Visualisation/static/css/main.bdb4d610.css.map",
-    "main.25f344ee.js.map": "/Curriculum_Visualisation/static/js/main.25f344ee.js.map",
+    "main.3828d9b6.js.map": "/Curriculum_Visualisation/static/js/main.3828d9b6.js.map",
     "787.5e9f5add.chunk.js.map": "/Curriculum_Visualisation/static/js/787.5e9f5add.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bdb4d610.css",
-    "static/js/main.25f344ee.js"
+    "static/js/main.3828d9b6.js"
   ]
 }
