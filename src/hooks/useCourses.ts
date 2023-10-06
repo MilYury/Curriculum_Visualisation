@@ -17,7 +17,9 @@ export const useCourses = (
       }
     };
 
-    void getCourses().catch();
+    void getCourses().catch((error) => {
+      console.error('Error fetching courses:', error);
+    });
   }, [subjects, spks]);
 
   return courses;

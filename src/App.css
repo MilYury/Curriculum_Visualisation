@@ -125,3 +125,15 @@
     padding: 6px 12px;
   }
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.loading-text {
+  margin-bottom: 16px;
+}

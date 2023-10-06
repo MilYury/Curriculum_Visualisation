@@ -10,7 +10,9 @@ export const useSubjects = (): ISubject[] | undefined => {
       setSubjects(await prepSubjects());
     };
 
-    void getSubjects().catch();
+    void getSubjects().catch((error) => {
+      console.error('Error fetching subjects:', error);
+    });
   }, []);
 
   return subjects;

@@ -33,9 +33,9 @@ export const fetchCsv = async (name: string): Promise<any> => {
   const fullPath = `${baseUrl}/${name}`;
 
   const response = await fetch(fullPath);
-  const reader = response?.body?.getReader();
-  const result = await reader?.read();
-  const decoder = new TextDecoder('utf-8');
-  const csv = decoder.decode(result?.value);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch CSV: ${response.statusText}`);
+  }
+  const csv = await response.text();
   return csv;
 };

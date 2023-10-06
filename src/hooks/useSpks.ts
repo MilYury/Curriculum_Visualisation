@@ -13,7 +13,9 @@ export const useSpks = (subjects?: ISubject[]): ISPK[] | undefined => {
       }
     };
 
-    void getSpks().catch();
+    void getSpks().catch((error) => {
+      console.error('Error fetching spks:', error);
+    });
   }, [subjects]);
 
   return spks;
