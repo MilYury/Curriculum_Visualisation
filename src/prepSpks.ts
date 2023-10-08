@@ -11,6 +11,16 @@ export const prepSPKs = async (subjects: ISubject[]): Promise<ISPK[]> => {
   const spksJson = csvJSON(spksCsv);
   let spks = JSON.parse(spksJson);
 
+  const uniqueIds = {} as any;
+
+  spks = spks.reduce((uniqueSpks: ISPK[], spk: ISPK) => {
+    if (uniqueIds[spk.StudyPackageCd] === undefined) {
+      uniqueIds[spk.StudyPackageCd] = true;
+      uniqueSpks.push(spk);
+    }
+    return uniqueSpks;
+  }, []);
+
   const spkToSpksCsv = await fetchCsv('spk_spk.csv');
   const spkToSpksJson = csvJSON(spkToSpksCsv);
   const spkToSpks = JSON.parse(spkToSpksJson);
@@ -57,22 +67,18 @@ const matchRelations = (
     );
     const spk = spkMap[relation.SPKID];
     if (spk !== undefined) {
-      if (spk.RelatedSubjects === undefined) {
-        spk.RelatedSubjects = [
-          subjects.find(
-            (subject) =>
-              subject.StudyPackageCd.toString().replace(/^0+/, '') ===
-              subjectIdWithoutZero
-          )!
-        ];
-      } else {
-        spk.RelatedSubjects.push(
-          subjects.find(
-            (subject) =>
-              subject.StudyPackageCd.toString().replace(/^0+/, '') ===
-              subjectIdWithoutZero
-          )!
-        );
+      const relatedSubject = subjects.find(
+        (subject) =>
+          subject.StudyPackageCd.toString().replace(/^0+/, '') ===
+          subjectIdWithoutZero
+      );
+
+      if (relatedSubject !== undefined) {
+        if (spk.RelatedSubjects === undefined) {
+          spk.RelatedSubjects = [relatedSubject];
+        } else {
+          spk.RelatedSubjects.push(relatedSubject);
+        }
       }
     }
   });

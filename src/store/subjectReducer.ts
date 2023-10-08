@@ -5,11 +5,13 @@ import type ISubject from '../interfaces/ISubject';
 export interface SubjectState {
   data: ISubject[];
   selectedData: ISubject | undefined;
+  searchValue: string;
 }
 
 const initialState: SubjectState = {
   data: [],
-  selectedData: undefined
+  selectedData: undefined,
+  searchValue: ''
 };
 
 const subjectReducer = (
@@ -33,6 +35,11 @@ const subjectReducer = (
       return {
         ...state,
         selectedData: undefined
+      };
+    case 'SET_SEARCH_VALUE_SUBJECT':
+      return {
+        ...state,
+        searchValue: action.payload
       };
     default:
       return state;

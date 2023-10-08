@@ -7,12 +7,14 @@ export interface CourseState {
   data: ICourse[];
   selectedData: ICourse | undefined;
   selectedMultipleData: ISubject[];
+  searchValue: string;
 }
 
 const initialState: CourseState = {
   data: [],
   selectedData: undefined,
-  selectedMultipleData: []
+  selectedMultipleData: [],
+  searchValue: ''
 };
 
 const courseReducer = (
@@ -36,6 +38,11 @@ const courseReducer = (
       return {
         ...state,
         selectedData: undefined
+      };
+    case 'SET_SEARCH_VALUE_COURSE':
+      return {
+        ...state,
+        searchValue: action.payload
       };
     default:
       return state;

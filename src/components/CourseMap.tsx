@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Pagination, Row, Col, Typography, Space } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { type RootState } from '../store/reducers';
 import type ICourse from '../interfaces/ICourse';
 import Course from './Course';
@@ -8,9 +8,14 @@ import Course from './Course';
 const { Title } = Typography;
 
 const CourseMap: React.FC = () => {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const courses = useSelector((state: RootState) => state.courses);
+  const searchValue = useSelector(
+    (state: RootState) => state.courses.searchValue
+  );
+
   const coursesPerPage = 20;
 
   const filteredCourses = courses.data?.filter((course) =>
@@ -39,9 +44,14 @@ const CourseMap: React.FC = () => {
       <Space direction="vertical" size={16}>
         <Input
           placeholder="Search..."
+          value={searchValue}
           onChange={(e) => {
             setSearch(e.target.value);
             setCurrentPage(1);
+            dispatch({
+              type: 'SET_SEARCH_VALUE_COURSE',
+              payload: e.target.value
+            });
           }}
         />
         <Row gutter={[16, 16]}>

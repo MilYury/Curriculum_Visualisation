@@ -7,7 +7,7 @@ const { Panel } = Collapse;
 const SPK: React.FC<{ spks: ISPK[] }> = ({ spks }) => {
   return (
     <Collapse>
-      {spks.map((spk, index) => (
+      {spks?.map((spk, index) => (
         <Panel header={<strong>{spk.FullTitle}</strong>} key={index}>
           <p>
             <strong>Id:</strong> {spk.StudyPackageCd}
