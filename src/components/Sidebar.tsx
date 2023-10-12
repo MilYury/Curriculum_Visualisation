@@ -45,22 +45,22 @@ const Sidebar: React.FC = () => {
   const items: MenuProps['items'] = [
     getItem({ label: 'Home', key: '' }),
     getItem({ label: 'Subjects', key: 'subjects' }),
-    getItem({ label: 'Courses', key: 'courses' }),
     getItem({
       label: 'Explore Subjects',
       key: 'exploreSubjects',
       disabled: selectedSubject === undefined
     }),
+    getItem({ label: 'Courses', key: 'courses' }),
     getItem({
       label: 'Explore Courses',
       key: 'exploreCourses',
       disabled: selectedCourse === undefined
     }),
-    getItem({
+    /* getItem({
       label: 'Explore Courses Collapse',
       key: 'exploreCoursesCollapse',
       disabled: selectedCourse === undefined
-    }),
+    }), */
     getItem({
       label: 'Explore Courses Grid',
       key: 'exploreCoursesGrid',

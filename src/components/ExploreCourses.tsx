@@ -12,7 +12,7 @@ import { type RootState } from '../store/reducers';
 import 'reactflow/dist/style.css';
 import type ISubject from '../interfaces/ISubject';
 import type ISPK from '../interfaces/ISPK';
-import { SubjectNode } from './Nodes';
+import { CourseNode, SubjectNode } from './Nodes';
 
 interface INodeEdges {
   nodes: any[];
@@ -107,7 +107,8 @@ const ExploreCourses: React.FC = () => {
   const courseNode = {
     id: selectedCourse?.StudyPackageCd ?? 'defaultId',
     position: { x: 250, y: 0 },
-    data: { label: selectedCourse?.FullTitle ?? 'defaultCourseTitle' }
+    data: { label: selectedCourse?.FullTitle ?? 'defaultCourseTitle' },
+    type: 'course'
   };
 
   let offsetX = window.innerWidth / 2;
@@ -152,7 +153,7 @@ const ExploreCourses: React.FC = () => {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        nodeTypes={{ subject: SubjectNode }}
+        nodeTypes={{ subject: SubjectNode, course: CourseNode }}
       >
         <Controls />
         <MiniMap />

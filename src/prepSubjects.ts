@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type IPreRequisite from './interfaces/IPreRequisite';
 import type ISubject from './interfaces/ISubject';
 import { fetchCsv, csvJSON } from './readCSV';
@@ -6,6 +7,19 @@ export const prepSubjects = async (): Promise<ISubject[]> => {
   const subjectsCsv = await fetchCsv('subjects.csv');
   const subjectsJson = csvJSON(subjectsCsv);
   let subjects = JSON.parse(subjectsJson);
+
+  const uniqueIds = {} as any;
+
+  subjects = subjects.reduce(
+    (uniqueSubjects: ISubject[], subject: ISubject) => {
+      if (uniqueIds[subject.StudyPackageCd] === undefined) {
+        uniqueIds[subject.StudyPackageCd] = true;
+        uniqueSubjects.push(subject);
+      }
+      return uniqueSubjects;
+    },
+    []
+  );
 
   const preReqCsv = await fetchCsv('prereq.csv');
   const preReqJson = csvJSON(preReqCsv);

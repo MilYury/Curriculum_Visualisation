@@ -1,5 +1,5 @@
-import { Space, Card, Collapse, Checkbox } from 'antd';
-import React, { type CSSProperties } from 'react';
+import { Space, Card, Collapse, Checkbox, Tooltip } from 'antd';
+import React from 'react';
 import type ISubject from '../interfaces/ISubject';
 import { useDispatch, useSelector } from 'react-redux';
 import { type RootState } from '../store/reducers';
@@ -17,14 +17,6 @@ const Subject: React.FC<ISubject> = ({
     (state: RootState) => state.subjects.selectedData
   );
 
-  const titleStyle: CSSProperties = {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    maxWidth: '330px',
-    display: 'block'
-  };
-
   const handleCheckboxChange = (e: CheckboxChangeEvent): void => {
     if (e.target.checked) {
       dispatch({ type: 'SET_SELECTED_SUBJECT', payload: StudyPackageCd });
@@ -37,8 +29,27 @@ const Subject: React.FC<ISubject> = ({
     <>
       <Space direction="vertical" size={16}>
         <Card
-          title={<span style={titleStyle}>{FullTitle}</span>}
-          style={{ width: 350 }}
+          title={
+            <Tooltip title={FullTitle}>
+              <div
+                style={{
+                  display: 'block',
+                  width: '300px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                {FullTitle}
+              </div>
+            </Tooltip>
+          }
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
           extra={
             <Checkbox
               onChange={handleCheckboxChange}
@@ -46,24 +57,26 @@ const Subject: React.FC<ISubject> = ({
             ></Checkbox>
           }
         >
-          <p>
-            <strong>Id:</strong> {StudyPackageCd}
-          </p>
-          <p>
-            <strong>Credit Point Value:</strong> {CreditPointValue}
-          </p>
-          {PreRequisites?.length > 0 && (
-            <Collapse key={StudyPackageCd}>
-              <Panel header={<strong>PreRequisites</strong>} key="1">
-                {PreRequisites.map((subject: ISubject) => (
-                  <p key={subject.StudyPackageCd}>
-                    <strong>{subject.StudyPackageCd}</strong> -{' '}
-                    {subject.FullTitle}
-                  </p>
-                ))}
-              </Panel>
-            </Collapse>
-          )}
+          <div style={{ overflowY: 'auto', flex: '1' }}>
+            <p>
+              <strong>Id:</strong> {StudyPackageCd}
+            </p>
+            <p>
+              <strong>Credit Point Value:</strong> {CreditPointValue}
+            </p>
+            {PreRequisites?.length > 0 && (
+              <Collapse key={StudyPackageCd}>
+                <Panel header={<strong>PreRequisites</strong>} key="1">
+                  {PreRequisites.map((subject: ISubject) => (
+                    <p key={subject.StudyPackageCd}>
+                      <strong>{subject.StudyPackageCd}</strong> -{' '}
+                      {subject.FullTitle}
+                    </p>
+                  ))}
+                </Panel>
+              </Collapse>
+            )}
+          </div>
         </Card>
       </Space>
     </>

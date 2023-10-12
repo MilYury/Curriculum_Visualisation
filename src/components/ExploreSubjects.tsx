@@ -11,6 +11,7 @@ import { type RootState } from '../store/reducers';
 
 import 'reactflow/dist/style.css';
 import type ISubject from '../interfaces/ISubject';
+import { SubjectNode } from './Nodes';
 
 interface INodeEdges {
   nodes: any[];
@@ -35,7 +36,8 @@ const ExploreSubjects: React.FC = () => {
     nodes.push({
       id: subject?.StudyPackageCd ?? 'defaultId',
       position: { x: offsetX, y: offsetY },
-      data: { label: subject?.FullTitle ?? 'defaultTitle' }
+      data: { label: subject?.FullTitle ?? 'defaultTitle' },
+      type: 'subject'
     });
 
     prerequisites.forEach((prerequisite, index) => {
@@ -65,7 +67,11 @@ const ExploreSubjects: React.FC = () => {
 
   return (
     <div style={{ height: '100vh' }}>
-      <ReactFlow nodes={nodes} edges={edges}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={{ subject: SubjectNode }}
+      >
         <Controls />
         <MiniMap />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />

@@ -20,3 +20,13 @@ export const SubjectNode: React.FC<any> = ({ data }) => {
     </div>
   );
 };
+
+export const CourseNode: React.FC<any> = ({ data }) => {
+  return (
+    <div style={{ ...nodeStyle, background: 'red' }}>
+      <Handle type="target" position={Position.Left} />
+      {data.label}
+      <Handle type="source" position={Position.Right} />
+    </div>
+  );
+};

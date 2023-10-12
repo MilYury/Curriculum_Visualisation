@@ -18,8 +18,10 @@ const SubjectMap: React.FC = () => {
     (state: RootState) => state.subjects.searchValue
   );
 
-  const filteredSubjects = subjects.data?.filter((subject) =>
-    subject.FullTitle.toLowerCase().includes(search.toLowerCase().trim())
+  const filteredSubjects = subjects.data?.filter(
+    (subject) =>
+      subject.FullTitle.toLowerCase().includes(search.toLowerCase().trim()) ||
+      subject.StudyPackageCd.toLowerCase().includes(search.toLowerCase().trim())
   );
 
   const subjectsPerPage = 20;
@@ -52,7 +54,14 @@ const SubjectMap: React.FC = () => {
         />
         <Row gutter={[16, 16]}>
           {displayedSubjects?.map((subject: ISubject, index: number) => (
-            <Col key={index} xs={24} sm={12} md={8} lg={6}>
+            <Col
+              key={index}
+              className="custom-col"
+              xs={24}
+              sm={12}
+              md={8}
+              lg={6}
+            >
               <Subject {...subject} />
             </Col>
           ))}

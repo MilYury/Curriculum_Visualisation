@@ -1,5 +1,5 @@
 import { Space, Card, Collapse, Tooltip } from 'antd';
-import React, { type CSSProperties } from 'react';
+import React from 'react';
 import type ICourse from '../interfaces/ICourse';
 import { useDispatch, useSelector } from 'react-redux';
 import { type RootState } from '../store/reducers';
@@ -20,12 +20,6 @@ const Course: React.FC<ICourse> = ({
     (state: RootState) => state.courses.selectedData
   );
 
-  const titleStyle: CSSProperties = {
-    wordWrap: 'break-word',
-    display: 'block',
-    overflow: 'visible'
-  };
-
   const handleCheckboxChange = (e: CheckboxChangeEvent): void => {
     if (e.target.checked) {
       dispatch({ type: 'SET_SELECTED_COURSE', payload: StudyPackageCd });
@@ -40,10 +34,25 @@ const Course: React.FC<ICourse> = ({
         <Card
           title={
             <Tooltip title={FullTitle}>
-              <span style={titleStyle}>{FullTitle}</span>
+              <div
+                style={{
+                  display: 'block',
+                  width: '300px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                {FullTitle}
+              </div>
             </Tooltip>
           }
-          style={{ width: 350 }}
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
           extra={
             <Checkbox
               onChange={handleCheckboxChange}
@@ -51,25 +60,27 @@ const Course: React.FC<ICourse> = ({
             ></Checkbox>
           }
         >
-          <p>
-            <strong>Id:</strong> {StudyPackageCd}
-          </p>
-          <p>
-            <strong>Credit Point Value:</strong> {CreditPointValue}
-          </p>
-          {SPKs?.length > 0 && <SPK spks={SPKs} />}
-          {Subjects?.length > 0 && (
-            <Collapse key={StudyPackageCd}>
-              <Panel header={<strong>Subjects</strong>} key="1">
-                {Subjects.map((subject, index) => (
-                  <p key={index}>
-                    <strong>{subject?.StudyPackageCd}</strong> -{' '}
-                    {subject?.FullTitle}
-                  </p>
-                ))}
-              </Panel>
-            </Collapse>
-          )}
+          <div style={{ overflowY: 'auto', flex: '1' }}>
+            <p>
+              <strong>Id:</strong> {StudyPackageCd}
+            </p>
+            <p>
+              <strong>Credit Point Value:</strong> {CreditPointValue}
+            </p>
+            {SPKs?.length > 0 && <SPK spks={SPKs} />}
+            {Subjects?.length > 0 && (
+              <Collapse key={StudyPackageCd}>
+                <Panel header={<strong>Subjects</strong>} key="1">
+                  {Subjects.map((subject, index) => (
+                    <p key={index}>
+                      <strong>{subject?.StudyPackageCd}</strong> -{' '}
+                      {subject?.FullTitle}
+                    </p>
+                  ))}
+                </Panel>
+              </Collapse>
+            )}
+          </div>
         </Card>
       </Space>
     </>
