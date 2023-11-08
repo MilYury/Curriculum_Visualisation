@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type ISPK from './interfaces/ISPK';
-import type ISPKToSPK from './interfaces/ISPKToSPK';
-import type ISPKToSubject from './interfaces/ISPKToSubject';
-import type ISubject from './interfaces/ISubject';
+import type ISPK from '../interfaces/ISPK';
+import type ISPKToSPK from '../interfaces/ISPKToSPK';
+import type ISPKToSubject from '../interfaces/ISPKToSubject';
+import type ISubject from '../interfaces/ISubject';
 import { fetchCsv, csvJSON } from './readCSV';
 
 export const prepSPKs = async (subjects: ISubject[]): Promise<ISPK[]> => {

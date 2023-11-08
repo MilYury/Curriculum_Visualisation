@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type ISPK from '../interfaces/ISPK';
-import { prepSPKs } from '../prepSpks';
+import { prepSPKs } from '../scripts/prepSpks';
 import type ISubject from '../interfaces/ISubject';
 
 export const useSpks = (subjects?: ISubject[]): ISPK[] | undefined => {

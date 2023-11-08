@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type ICourse from './interfaces/ICourse';
-import type ICourseToSPK from './interfaces/ICourseToSPK';
-import type ICourseToSubject from './interfaces/ICourseToSubject';
-import type ISPK from './interfaces/ISPK';
-import type ISubject from './interfaces/ISubject';
+import type ICourse from '../interfaces/ICourse';
+import type ICourseToSPK from '../interfaces/ICourseToSPK';
+import type ICourseToSubject from '../interfaces/ICourseToSubject';
+import type ISPK from '../interfaces/ISPK';
+import type ISubject from '../interfaces/ISubject';
 import { fetchCsv, csvJSON } from './readCSV';
 
 export const prepCourses = async (

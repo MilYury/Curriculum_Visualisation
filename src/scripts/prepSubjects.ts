@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type IPreRequisite from './interfaces/IPreRequisite';
-import type ISubject from './interfaces/ISubject';
+import type IPreRequisite from '../interfaces/IPreRequisite';
+import type ISubject from '../interfaces/ISubject';
 import { fetchCsv, csvJSON } from './readCSV';
 
 export const prepSubjects = async (): Promise<ISubject[]> => {

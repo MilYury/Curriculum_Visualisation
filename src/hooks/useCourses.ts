@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type ICourse from '../interfaces/ICourse';
-import { prepCourses } from '../prepCourses';
+import { prepCourses } from '../scripts/prepCourses';
 import type ISubject from '../interfaces/ISubject';
 import type ISPK from '../interfaces/ISPK';
 

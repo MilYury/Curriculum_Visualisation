@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import ReactFlow, {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { prepSubjects } from '../prepSubjects';
+import { prepSubjects } from '../scripts/prepSubjects';
 import type ISubject from '../interfaces/ISubject';
 
 export const useSubjects = (): ISubject[] | undefined => {
